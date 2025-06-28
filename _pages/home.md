@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: simple_home
 permalink: /
 ---
 

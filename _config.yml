@@ -24,30 +24,37 @@ search: false
 # Build settings
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
+
+# Put every post under **/blog/** instead of the site root
+collections:                # Jekyll creates a default “posts” collection,
+  posts:                    # but declaring it here lets us tweak its URL.
+    output: true
+    permalink: /blog/:title/
+
+# kramdown:
+#   math_engine: mathjax
+#   math_engine_opts:
+#     preview: false
+#   parse_block_html: true
+#   hard_wrap: false
+
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
 timezone: Asia/Jerusalem # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
   - _pages
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+pagination:
+  enabled: true        # <-- this single line already turns it on
+  per_page: 5          #   optional; matches your page-front-matter
+  permalink: /blog/page:num/   #   optional; keeps blog pages together
+  first_page_url: /blog/     # <— key that moves page-1 to /blog/
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-paginate
+  - jekyll-paginate-v2
+  # - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
@@ -103,3 +110,9 @@ defaults:
       
 atom_feed:
   hide: true
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-3PSJDRC4CW"
+    anonymize_ip: false  # default

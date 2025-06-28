@@ -1,7 +1,12 @@
 main:
   - title: "Home"
     url: /
+
   - title: "Publications"
     url: /publications/
+
+  - title: "Blog"          # label that appears in the nav bar
+    url: /blog/            # points to your blog index
+
   - title: "Talks"
     url: /talks/

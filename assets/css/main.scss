@@ -64,11 +64,11 @@ html {
 /* ------------------------------------------------------------------ */
 /* We let the links scroll horizontally instead of getting cut off.   */
 
-@media (max-width: 400px) {            /* choose your upper phone limit */
+@media (max-width: 500px) {            /* choose your upper phone limit */
 /* Fluid font size */
-.greedy-nav .visible-links a {
-  font-size: clamp(0.8rem, 4.0vw, 1rem);  /* Tweak the linear scaling to your liking */
-}
+// .greedy-nav .visible-links a {
+//   font-size: clamp(0.8rem, 4.0vw, 1rem);  /* Tweak the linear scaling to your liking */
+// }
 .greedy-nav .visible-links > li {
   margin-inline-start: -1.5em;   /* pulls each item left */
 }
