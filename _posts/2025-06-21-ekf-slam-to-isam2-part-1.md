@@ -148,7 +148,7 @@ In the algorithm, *predict* handles robot motion, while *update* folds in the la
 
 ## Mathematical formulation
 
-The Kalman filter maintains the posterior $p(\mathbf{x} _ {k} \mid \mathbf{z} _ {1:k})$ - the best Gaussian estimate of the current state after **all** measurements up to time $k$.
+The Kalman Filter maintains the posterior $p(\mathbf{x} _ {k} \mid \mathbf{z} _ {1:k})$ - the best Gaussian estimate of the current state after **all** measurements up to time $k$.
 
 With **linear** models that posterior is exact; the **Extended** KF linearizes the motion/measurement models around the current estimate, so the same algorithm still works when they are mildly non-linear.
 
