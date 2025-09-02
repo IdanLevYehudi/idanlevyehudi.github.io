@@ -1,6 +1,6 @@
 ---
 # --- Front-matter ---
-title:  "From EKF-SLAM to iSAM2 - Part 1"
+title:  "From EKF-SLAM to iSAM2 - Part 1 (EKF-SLAM)"
 date:   2025-06-28 21:00 +0300      # adjust time if you like
 excerpt: "Going through major advancements in SLAM history - part one focuses on EKF-SLAM"
 
