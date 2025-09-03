@@ -25,7 +25,7 @@ toc: true
 toc_label: "On this page"
 toc_icon: "list"
 
-last_modified_at: 2025-09-02 22:00 +0300
+last_modified_at: 2025-09-03 11:00 +0300
 ---
 
 <!-- Keep notations consistent - x for robot poses, m for landmarks, z for measurements, u for controls. Use subscripts for time indices, superscripts for landmark indices, superscripts in brackets like (i) for particle indices. -->
@@ -210,7 +210,7 @@ This "simple" result can be easily missed, but it implies a lot - **if we know t
 
 **Let's assume for now that we know the pose variables $x_{0:k}$.** We'll get back to this later.
 
-### 3.1 · Landmark Posteriors
+## 3.1 · Landmark Posteriors
 
 For a single landmark \$m^i\$, the recursive update is
 
@@ -261,7 +261,7 @@ These terms are already computed during the EKF update, so evaluating the weight
 
 ---
 
-### 3.3 · Why Rao-Blackwellization Helps
+## 3.3 · Why Rao-Blackwellization Helps
 
 Instead of sampling landmarks, we integrate them out analytically:
 
@@ -269,7 +269,7 @@ Instead of sampling landmarks, we integrate them out analytically:
 2. **Lower complexity.** Sampling in \$(x\_{0\:k}, m^{1\:L})\$ would require exponentially more particles. Integrating landmarks keeps the filter tractable.
 3. **Gaussian structure.** Each landmark is stored compactly as \$(\mu, \Sigma)\$ and updated independently, avoiding the curse of dimensionality.
 
-# 4 · FastSLAM 1.0 — Step by Step
+# 4 · FastSLAM 1.0 - Step by Step
 
 FastSLAM in its original form (later called **FastSLAM 1.0**) was introduced in 2002 [^FastSLAM_short]. Many subsequent improvements built on this foundation.
 
