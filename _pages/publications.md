@@ -22,6 +22,11 @@ Publications in [Google Scholar](https://scholar.google.com/citations?user=5yuc2
 
 ## Preprints
 
+- **Online Robust Planning under Model Uncertainty: A Sample-Based Approach**\
+  <span style="color:gray">Tamir Shazman, **Idan Lev-Yehudi**, Ron Benchetrit, Vadim Indelman</span>\
+  *Under Review.*\
+  Planning algorithm for Robust MDPs with finite-time approximation bounds in large/infinite state spaces. \
+  [Paper](https://arxiv.org/pdf/2509.10162){: .btn .btn--primary .btn--small .btn--top .btn--spacing}
 - **Action-Gradient Monte Carlo Tree Search for Non-Parametric Continuous (PO)MDPs**\
   <span style="color:gray">**Idan Lev-Yehudi**, Michael Novitsky, Moran Barenboim, Ron Benchetrit, Vadim Indelman</span>\
   *Under Review.*\
