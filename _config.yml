@@ -75,6 +75,9 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github-square"
       url: "https://github.com/IdanLevYehudi"
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google-scholar"
+      url: "https://scholar.google.com/citations?user=5yuc2i0UkD4C&hl=en"
       
 footer:
   links:
@@ -87,6 +90,9 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github-square"
       url: "https://github.com/IdanLevYehudi"
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google-scholar"
+      url: "https://scholar.google.com/citations?user=5yuc2i0UkD4C&hl=en"
 
 defaults:
   # _posts
