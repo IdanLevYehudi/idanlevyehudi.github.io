@@ -25,7 +25,7 @@ toc: true
 toc_label: "On this page"
 toc_icon: "list"
 
-last_modified_at: 2026-02-27 11:00 +0300
+last_modified_at: 2026-03-03 20:00 +0300
 ---
 
 <!-- Keep notations consistent - x for robot poses, m for landmarks, z for measurements, u for controls. Use subscripts for time indices, superscripts for landmark indices. -->
@@ -196,10 +196,10 @@ The joint density is $p(x1, x2) \propto f1(x1)\cdot f12(x1, x2)$, up to normaliz
 The factorization of the Full-SLAM MAP objective is a factor graph hiding in plain sight:
 
 - Variable nodes: robot poses \$x_0,\dots,x_k\$ and landmarks \$m^1,\dots,m^L\$.
-- Factor nodes:
-  - motion factor \$f_t^{\text{motion}}(x_t,x_{t+1})\$,
-  - measurement factor \$f_{t,i}^{\text{meas}}(x_t,m^{c_t^i})\$,
-  - prior factor \$f_0^{\text{prior}}(x_0)\$.
+- Factor nodes are of 3 types:
+  1. Motion factors \$f_t^{\text{motion}}(x_t,x_{t+1})\$.
+  2. Measurement factor \$f_{t,i}^{\text{meas}}(x_t,m^{c_t^i})\$.
+  3. Prior factor \$f_0^{\text{prior}}(x_0)\$.
 
 A tiny example (two poses, one landmark), with explicit factor nodes:
 

@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, Rectangle
+from matplotlib.patches import Circle, FancyBboxPatch
 
 # How to run: from repo root execute
 # `python3 assets/images/posts/2026-02-27-ekf-slam-to-isam2-part-3/generate_graphslam_figures.py`
@@ -20,6 +20,8 @@ PALETTE = {
     "fac_face": "#1f5d5a",
     "fac_edge": "#12343b",
     "edge": "#3f8f88",
+    "node_highlight": "#ffffff",
+    "node_shadow": "#0f2d33",
 }
 
 
@@ -29,7 +31,15 @@ def style():
             "figure.facecolor": PALETTE["bg"],
             "axes.facecolor": PALETTE["bg"],
             "savefig.facecolor": PALETTE["bg"],
-            "font.family": "DejaVu Sans",
+            "font.family": [
+                "Lato",
+                "Open Sans",
+                "PT Sans",
+                "Inter",
+                "Noto Sans",
+                "DejaVu Sans",
+            ],
+            "mathtext.fontset": "stixsans",
             "text.color": PALETTE["text"],
             "axes.labelcolor": PALETTE["text"],
             "axes.edgecolor": PALETTE["axis"],
@@ -51,7 +61,32 @@ def save_figure(fig, stem, image_format):
 
 def add_node(ax, xy, label, kind="variable", size=0.3):
     x_pos, y_pos = xy
+    label_size = 21.5 if kind == "variable" else 20.5
+    if kind == "factor" and "prior" in label:
+        label_size = 18.8
+
+    # Consistent light direction across all nodes:
+    # light from top-left, cast shadow to bottom-right.
+    shadow_dx = 0.12 * size
+    shadow_dy = -0.12 * size
+    highlight_dx = -0.22 * size
+    highlight_dy = 0.22 * size
+    shadow_alpha = 0.18
+    highlight_alpha = 0.08
+    highlight_scale = 0.8
+    highlight_scale_factor = 0.9
+
     if kind == "variable":
+        shadow = Circle(
+            (x_pos + shadow_dx, y_pos + shadow_dy),
+            size * 1.0,
+            facecolor=PALETTE["node_shadow"],
+            edgecolor="none",
+            alpha=shadow_alpha,
+            zorder=1.5,
+        )
+        ax.add_patch(shadow)
+
         patch = Circle(
             (x_pos, y_pos),
             size,
@@ -60,18 +95,41 @@ def add_node(ax, xy, label, kind="variable", size=0.3):
             linewidth=2,
             zorder=2,
         )
+        highlight = Circle(
+            (x_pos + highlight_dx, y_pos + highlight_dy),
+            size * highlight_scale,
+            facecolor=PALETTE["node_highlight"],
+            edgecolor="none",
+            alpha=highlight_alpha,
+            zorder=2.2,
+        )
     else:
-        patch = Rectangle(
+        shadow = FancyBboxPatch(
+            (x_pos - size + shadow_dx, y_pos - size + shadow_dy),
+            2 * size,
+            2 * size,
+            boxstyle=f"round,pad=0.06,rounding_size={size * 0.2}",
+            facecolor=PALETTE["node_shadow"],
+            edgecolor="none",
+            alpha=shadow_alpha,
+            zorder=1.5,
+        )
+        ax.add_patch(shadow)
+
+        patch = FancyBboxPatch(
             (x_pos - size, y_pos - size),
             2 * size,
             2 * size,
+            boxstyle=f"round,pad=0.06,rounding_size={size * 0.2}",
             facecolor=PALETTE["fac_face"],
             edgecolor=PALETTE["fac_edge"],
             linewidth=2,
-            joinstyle="round",
             zorder=2,
         )
+
     ax.add_patch(patch)
+    if kind == "variable":
+        ax.add_patch(highlight)
     ax.text(
         x_pos,
         y_pos,
@@ -79,8 +137,8 @@ def add_node(ax, xy, label, kind="variable", size=0.3):
         ha="center",
         va="center",
         color="white",
-        fontsize=11,
-        weight="bold",
+        fontsize=label_size,
+        weight=600,
         zorder=3,
     )
 
@@ -151,7 +209,7 @@ def gaussian(x_val, mean, std):
 def draw_factor_graph_hello_world(image_format):
     fig, ax = plt.subplots(figsize=(7.2, 1.3))
     ax.set_xlim(0.7, 6.6)
-    ax.set_ylim(1.0, 2.0)
+    ax.set_ylim(0.95, 2.05)
     ax.set_aspect("equal", adjustable="box")
     ax.axis("off")
 
@@ -164,17 +222,17 @@ def draw_factor_graph_hello_world(image_format):
     connect(ax, x1, f12)
     connect(ax, f12, x2)
 
-    add_node(ax, f1, "f1", kind="factor")
-    add_node(ax, x1, "x1", kind="variable")
-    add_node(ax, f12, "f12", kind="factor")
-    add_node(ax, x2, "x2", kind="variable")
+    add_node(ax, f1, r"$f_{1}$", kind="factor", size=0.35)
+    add_node(ax, x1, r"$x_{1}$", kind="variable", size=0.32)
+    add_node(ax, f12, r"$f_{12}$", kind="factor", size=0.35)
+    add_node(ax, x2, r"$x_{2}$", kind="variable", size=0.32)
 
     save_figure(fig, "factor_graph_hello_world", image_format)
 
 
 def draw_factor_graph_tiny_slam(image_format):
     fig, ax = plt.subplots(figsize=(7.2, 4.8), constrained_layout=True)
-    ax.set_xlim(0.9, 8.3)
+    ax.set_xlim(0.7, 8.5)
     ax.set_ylim(0.2, 5.6)
     ax.axis("off")
 
@@ -197,15 +255,15 @@ def draw_factor_graph_tiny_slam(image_format):
     ]:
         connect(ax, start, end)
 
-    add_node(ax, f_prior, "prior", kind="factor")
-    add_node(ax, x0, "x0", kind="variable")
-    add_node(ax, f_motion, "motion", kind="factor")
-    add_node(ax, x1, "x1", kind="variable")
-    add_node(ax, f_meas0, "meas0", kind="factor")
-    add_node(ax, f_meas1, "meas1", kind="factor")
-    add_node(ax, m1, "m1", kind="variable")
+    add_node(ax, f_prior, r"$f_{0}^{\mathrm{prior}}$", kind="factor", size=0.35)
+    add_node(ax, x0, r"$x_{0}$", kind="variable", size=0.32)
+    add_node(ax, f_motion, r"$f_{0}^{\mathrm{motion}}$", kind="factor", size=0.35)
+    add_node(ax, x1, r"$x_{1}$", kind="variable", size=0.32)
+    add_node(ax, f_meas0, r"$f_{0,1}^{\mathrm{meas}}$", kind="factor", size=0.35)
+    add_node(ax, f_meas1, r"$f_{1,1}^{\mathrm{meas}}$", kind="factor", size=0.35)
+    add_node(ax, m1, r"$m_{1}$", kind="variable", size=0.32)
 
-    ax.text(5, 5.55, "Tiny Full-SLAM factor graph", ha="center", fontsize=14, weight="bold", color=PALETTE["text"])
+    ax.text(4.6, 5.55, "Tiny Full-SLAM factor graph", ha="center", fontsize=14, weight="bold", color=PALETTE["text"])
 
     save_figure(fig, "factor_graph_tiny_full_slam", image_format)
 
