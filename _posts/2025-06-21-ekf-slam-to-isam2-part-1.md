@@ -28,7 +28,7 @@ toc_icon: "list"
 last_modified_at: 2025-06-28 21:00 +0300  # update when you edit
 ---
 
-# 1 · Why we need good mapping algorithms
+# 1 &middot; Why we need good mapping algorithms
 
 Ever wondered how your robot vacuum knows where it’s been, and where it still needs to go?  
 
@@ -52,7 +52,7 @@ This series *From EKF-SLAM to iSAM2* explores the ingredients that make this pos
 
 [^notSponsored]: Links are for illustration only; there’s no sponsorship involved.
 
-# 2 · What *is* SLAM?
+# 2 &middot; What *is* SLAM?
 
 <figure style="text-align:center;">
   <img
@@ -102,7 +102,7 @@ But in the 1980s the idea of coupling the two problems tightly was radical; rese
 
 In the next section we’ll see how the **Extended Kalman Filter (EKF)** became the first widely adopted framework to put that intuition into practice, and how it launched SLAM research into high gear.
 
-# 3 · EKF-SLAM
+# 3 &middot; EKF-SLAM
 
 The term *SLAM* took off after Dissanayake et al. [^dissanayake01] published a 2001 paper that gathered two decades of scattered ideas into one recipe: **Extended Kalman-Filter SLAM**, or **EKF-SLAM**. They showed how a single estimator can track both the robot pose and every landmark at once. EKF-SLAM tracks a huge cloud of uncertainty that covers the robot pose and every landmark, as gradually “tightening” with each observation.
 <details markdown="1">
@@ -279,7 +279,7 @@ $$
 Everything else from data association, landmark initialization, to sparsity tricks, wraps around these two lines.
 
 
-# 4 · Yet we rarely see EKF-SLAM anymore
+# 4 &middot; Yet we rarely see EKF-SLAM anymore
 
 EKF-SLAM solved the chicken-and-egg, but created an elephant-in-the-room matrix.
 As the map grows the covariance matrix fills in, so each predict and update step costs quadratic time $O(N^2)$, and the filter must store the same quadratic amount of memory - *painful* if you hope to map tens of thousands of landmarks.
@@ -293,4 +293,3 @@ Later methods attack these two limitations from different angles:
 * **iSAM2** turns SLAM into a sparse linear-algebra problem without sacrificing memory of the entire pose history, while keeping updates sparse and efficient.
 
 Those improvements are the focus of the next posts in this series.
-

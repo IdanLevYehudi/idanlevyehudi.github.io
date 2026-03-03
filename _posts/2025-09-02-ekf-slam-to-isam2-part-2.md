@@ -49,7 +49,7 @@ last_modified_at: 2025-09-03 11:00 +0300
   </figcaption>
 </figure>
 
-# 1 · SLAM at Scale
+# 1 &middot; SLAM at Scale
 
 In the [previous post](https://idanlevyehudi.github.io/blog/ekf-slam-to-isam2-part-1/), we ended with the scaling limits of **EKF‑SLAM**: both memory and per‑update computation grow quadratically with the number of poses and landmarks. For demanding applications that need accurate, large‑area maps like those required by **[autonomous 3‑D inspections](https://youtu.be/1L8vtKaR77o&t=414)**[^notSponsored], the environment may contain tens of thousands to *millions* of landmarks. The SLAM backbone for navigation and planning must scale accordingly. 
 
@@ -59,12 +59,12 @@ In this post, we focus on **FastSLAM**, a particle‑filtering framework that ex
 
 FastSLAM also paved the way for **GMapping** [^gmapping], one of ROS’s most widely used open‑source SLAM packages. Although often viewed as "old‑school," it remains a practical, plug‑and‑play option nearly two decades after its release.
 
-## 1.1 · FastSLAM Highlights
+## 1.1 &middot; FastSLAM Highlights
 
 * **Computational efficiency.** A straightforward implementation costs $\mathcal O(NL)$ for $N$ particles and $L$ landmarks using a **Rao‑Blackwellized Particle Filter (RBPF)**; tree‑based data structures reduce average access to $\mathcal O(\log L)$, yielding about $\mathcal O(N\log L)$ per update.
 * **Robust data association.** Multiple hypotheses are maintained across particles, mitigating the catastrophic failures common in EKF‑SLAM when associations are wrong.
 
-# 2 · Monte Carlo Estimation and Particle-Based Representations
+# 2 &middot; Monte Carlo Estimation and Particle-Based Representations
 
 Monte Carlo methods are widely used across science and engineering. **Monte Carlo** [^LemieuxBook] refers to estimating quantities of interest (often integrals) by random sampling:
 
@@ -76,7 +76,7 @@ Monte Carlo methods are widely used across science and engineering. **Monte Carl
 
 [^LemieuxBook]: Christiane Lemieux. *Monte Carlo and Quasi-Monte Carlo Sampling*. Springer, 2009. [doi](https://doi.org/10.1007/978-0-387-78165-5).
 
-## 2.1 · Particle (Empirical) Approximations
+## 2.1 &middot; Particle (Empirical) Approximations
 
 We denote by \$x\_k\$ the robot state at time \$k\$, by \$u\_{k-1}\$ the control applied between \$k{-}1\$ and \$k\$, and by \$z\_k\$ the measurement at time \$k\$. Let \$x\_{0\:k}=(x\_0,\dots,x\_k)\$ be the trajectory up to time \$k\$. Our goal is to approximate the posterior \$p(x\_{0\:k}\mid z\_{1\:k},u\_{1\:k-1})\$.
 
@@ -92,7 +92,7 @@ $$
 \mathbb{E} _ {x _ {0:k} \sim \widehat{p}} [g(x _ {0:k})] = \sum _ {i=1} ^{N} w _ k^{(i)} \, g(x _ {0:k} ^{(i)}).
 $$
 
-## 2.2 · Sequential Particle Filtering (SIS/SIR)
+## 2.2 &middot; Sequential Particle Filtering (SIS/SIR)
 
 Sequential filtering incrementally updates the particle approximation of our posterior. At each time step we use only the previous estimate and new data, rather than revisiting the full history. Still, this update accounts for all past controls and measurements. Particle filtering has a deep mathematical foundation; for details see Doucet et al. [^Doucet01].
 
@@ -162,7 +162,7 @@ The required number of particles grows **exponentially with state dimension** [^
 
 [^BayesianMapLearning]: Murphy, Kevin P. "Bayesian map learning in dynamic environments." Advances in neural information processing systems 12 (1999).
 
-# 3 · Factored Representation of SLAM
+# 3 &middot; Factored Representation of SLAM
 
 <figure style="text-align:center;">
   <img
@@ -210,7 +210,7 @@ This "simple" result can be easily missed, but it implies a lot - **if we know t
 
 **Let's assume for now that we know the pose variables $x_{0:k}$.** We'll get back to this later.
 
-## 3.1 · Landmark Posteriors
+## 3.1 &middot; Landmark Posteriors
 
 For a single landmark \$m^i\$, the recursive update is
 
@@ -233,7 +233,7 @@ In practice, we do not know the trajectory \$x\_{0\:k}\$. To exploit this factor
 
 [^RBPF_more_info]: Murphy, Kevin, and Stuart Russell. *Rao-Blackwellised Particle Filtering for Dynamic Bayesian Networks*. In *Sequential Monte Carlo Methods in Practice*, Springer, 2001.
 
-## 3.2 · Rao-Blackwellization for SLAM
+## 3.2 &middot; Rao-Blackwellization for SLAM
 
 > **RBPF in one line:** sample the hard part (the trajectory), integrate the easy part (landmarks) analytically.
 
@@ -261,7 +261,7 @@ These terms are already computed during the EKF update, so evaluating the weight
 
 ---
 
-## 3.3 · Why Rao-Blackwellization Helps
+## 3.3 &middot; Why Rao-Blackwellization Helps
 
 Instead of sampling landmarks, we integrate them out analytically:
 
@@ -269,13 +269,13 @@ Instead of sampling landmarks, we integrate them out analytically:
 2. **Lower complexity.** Sampling in \$(x\_{0\:k}, m^{1\:L})\$ would require exponentially more particles. Integrating landmarks keeps the filter tractable.
 3. **Gaussian structure.** Each landmark is stored compactly as \$(\mu, \Sigma)\$ and updated independently, avoiding the curse of dimensionality.
 
-# 4 · FastSLAM 1.0 - Step by Step
+# 4 &middot; FastSLAM 1.0 - Step by Step
 
 FastSLAM in its original form (later called **FastSLAM 1.0**) was introduced in 2002 [^FastSLAM_short]. Many subsequent improvements built on this foundation.
 
 [^FastSLAM_short]: Montemerlo, Michael, Sebastian Thrun, Daphne Koller, and Ben Wegbreit. *FastSLAM: A Factored Solution to the Simultaneous Localization and Mapping Problem*. AAAI, 2002.
 
-## 4.1 · Simplified Algorithm
+## 4.1 &middot; Simplified Algorithm
 
 We now assemble the pieces into a simplified version of FastSLAM 1.0[^FastSLAM_short]:
 
@@ -288,7 +288,7 @@ We now assemble the pieces into a simplified version of FastSLAM 1.0[^FastSLAM_s
    * Compute the particle weight \$w\_k^{(i)}\$ as the product of observation likelihoods (often accumulated in log form for stability).
 4. **Resampling.** Draw a new set of particles with probability proportional to \$w\_k^{(i)}\$.
 
-## 4.2 · Toward the Full Algorithm
+## 4.2 &middot; Toward the Full Algorithm
 
 To make FastSLAM practical and robust for online use, several additional mechanisms are required. The full details are presented in the extended paper [^FastSLAM_full]. Here we highlight the most important elements.
 
@@ -308,19 +308,19 @@ Naively copying landmark estimates for each particle at every step would be too 
 
 Each particle maintains its own correspondence hypotheses. This diversity allows the filter to handle ambiguous or incorrect associations more gracefully than EKF-SLAM, where a single wrong association can cause catastrophic failures.
 
-# 5 · FastSLAM 2.0 and GMapping
+# 5 &middot; FastSLAM 2.0 and GMapping
 
 FastSLAM 2.0 [^FastSLAM_full] improved on FastSLAM 1.0 by introducing a better proposal distribution. Instead of sampling the next pose from the motion model alone, it incorporates the latest scan \$z\_k\$ (via scan matching) to approximate \$p(x\_k \mid x\_{k-1}, u\_{k-1}, z\_k)\$. This reduces weight variance and lowers the number of required particles. 
 
 FastSLAM 2.0 is definitely more involved than its predecessor - if you manage to understand it, then you're a true probabilistic robotics master!
 
-## 5.1 · Occupancy Grids vs. Landmark Maps
+## 5.1 &middot; Occupancy Grids vs. Landmark Maps
 
 While landmark-based maps estimate continuous positions \$m^i\$, **occupancy grids** discretize the world into independent Bernoulli cells \$m^j \in {0,1}\$. Given a trajectory \$x\_{0\:k}\$, cells update independently using log-odds from the range sensor model. This formulation is efficient: particles represent trajectories only, while maps are updated deterministically per particle.
 
 The grid representation trades geometric accuracy for robustness and speed. Landmarks provide compact, continuous estimates but require explicit data association. Grids avoid this by treating the environment as a dense array of cells, at the cost of higher memory usage.
 
-## 5.2 · GridSLAM and Its Advantages
+## 5.2 &middot; GridSLAM and Its Advantages
 
 This occupancy-grid formulation, combined with RBPF, is often called **GridSLAM**. It became the dominant approach for 2-D LiDAR mapping because it offers:
 
@@ -328,7 +328,7 @@ This occupancy-grid formulation, combined with RBPF, is often called **GridSLAM*
 * **Scan matching** to produce accurate proposals for \$x\_k\$.
 * **Per-particle data association** that tolerates ambiguity.
 
-## 5.3 · GMapping
+## 5.3 &middot; GMapping
 
 **GMapping** [^gmapping] built directly on GridSLAM, adding several practical enhancements:
 
@@ -349,7 +349,7 @@ Relevant links:
 
 [^gmapping]: Giorgio Grisetti, Cyrill Stachniss, and Wolfram Burgard. *Improving Grid-based SLAM with Rao-Blackwellized Particle Filters by Adaptive Proposals and Selective Resampling*. In Proc. IEEE ICRA, 2005.
 
-# 6 · Looking Towards GraphSLAM
+# 6 &middot; Looking Towards GraphSLAM
 
 FastSLAM and particle-based mapping were the first approaches to demonstrate practical, real-time SLAM at scale. At the time, many researchers considered the problem essentially solved:
 
