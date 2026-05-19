@@ -5,6 +5,16 @@ title: "Publications"
 
 Publications in [Google Scholar](https://scholar.google.com/citations?user=5yuc2i0UkD4C) and [DBLP](https://dblp.org/pid/341/6113.html).
 
+- **Action-Gradient Monte Carlo Tree Search for Non-Parametric Continuous (PO)MDPs**\
+  <span style="color:gray">**Idan Lev-Yehudi**, Michael Novitsky, Moran Barenboim, Ron Benchetrit, Vadim Indelman</span>\
+  *Accepted to the 35th International Joint Conference on Artificial Intelligence (IJCAI-ECAI 2026)*\
+  Online MDP & POMDP planning using gradient-enhanced MCTS with consistent value estimates. \
+  [Paper](https://arxiv.org/pdf/2503.12181){: .btn .btn--primary .btn--small .btn--top .btn--spacing}
+- **Online Robust Planning under Model Uncertainty: A Sample-Based Approach**\
+  <span style="color:gray">Tamir Shazman, **Idan Lev-Yehudi**, Ron Benchetrit, Vadim Indelman</span>\
+  *Proceedings of the AAAI Conference on Artificial Intelligence, vol. 40, no. 43. 2026. (AAAI-26)*\
+  Planning algorithm for Robust MDPs with finite-time approximation bounds in large/infinite state spaces. \
+  [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/40959/44920){: .btn .btn--primary .btn--small .btn--top .btn--spacing}
 - **Simplifying Complex Observation Models in Continuous POMDP Planning with Probabilistic Guarantees and Practice**\
   <span style="color:gray">**Idan Lev-Yehudi**, Moran Barenboim, and Vadim Indelman</span>\
   *Proceedings of the AAAI Conference on Artificial Intelligence. Vol. 38. No. 18. 2024. (AAAI-24)*\
@@ -22,16 +32,6 @@ Publications in [Google Scholar](https://scholar.google.com/citations?user=5yuc2
 
 ## Preprints
 
-- **Online Robust Planning under Model Uncertainty: A Sample-Based Approach**\
-  <span style="color:gray">Tamir Shazman, **Idan Lev-Yehudi**, Ron Benchetrit, Vadim Indelman</span>\
-  *Under Review.*\
-  Planning algorithm for Robust MDPs with finite-time approximation bounds in large/infinite state spaces. \
-  [Paper](https://arxiv.org/pdf/2509.10162){: .btn .btn--primary .btn--small .btn--top .btn--spacing}
-- **Action-Gradient Monte Carlo Tree Search for Non-Parametric Continuous (PO)MDPs**\
-  <span style="color:gray">**Idan Lev-Yehudi**, Michael Novitsky, Moran Barenboim, Ron Benchetrit, Vadim Indelman</span>\
-  *Under Review.*\
-  Online MDP & POMDP planning using gradient-enhanced MCTS with consistent value estimates. \
-  [Paper](https://arxiv.org/pdf/2503.12181){: .btn .btn--primary .btn--small .btn--top .btn--spacing}
 - **Anytime Incremental $\rho$POMDP Planning in Continuous Spaces**\
   <span style="color:gray">Ron Benchetrit, **Idan Lev-Yehudi**, Andrey Zhitnikov, Vadim Indelman</span>\
   *Under Review.*\
