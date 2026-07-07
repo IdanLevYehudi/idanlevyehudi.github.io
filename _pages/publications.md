@@ -67,11 +67,24 @@ Publications in [Google Scholar](https://scholar.google.com/citations?user=5yuc2
 
 <div class="publication-list">
   <article class="publication-item">
+    <img class="publication-thumbnail" src="/assets/images/publications/thumbs/levyehudi26arxiv-gss.png" alt="Graph Sparse Sampling planning graph thumbnail">
+    <div class="publication-content">
+      <h2 class="publication-title">Graph Sparse Sampling: Breaking the Curse of the Horizon in Continuous MDP Planning</h2>
+      <p class="publication-authors"><strong>Idan Lev-Yehudi</strong>, Vadim Indelman</p>
+      <p class="publication-venue"><em>arXiv preprint, 2026.</em></p>
+      <p>MDP planning via graph shared samples leads to a GPU-friendly planner with finite-sample guarantees.</p>
+      <p class="publication-links">
+        <a href="https://arxiv.org/pdf/2607.05359" class="btn btn--primary btn--small btn--top btn--spacing">Paper</a>
+      </p>
+    </div>
+  </article>
+
+  <article class="publication-item">
     <img class="publication-thumbnail" src="/assets/images/publications/thumbs/benchetrit25arxiv-trees.png" alt="Anytime incremental rho-POMDP planning thumbnail">
     <div class="publication-content">
       <h2 class="publication-title">Anytime Incremental $\rho$POMDP Planning in Continuous Spaces</h2>
       <p class="publication-authors">Ron Benchetrit, <strong>Idan Lev-Yehudi</strong>, Andrey Zhitnikov, Vadim Indelman</p>
-      <p class="publication-venue"><em>Under Review.</em></p>
+      <p class="publication-venue"><em>arXiv preprint, 2025.</em></p>
       <p>Practical incremental POMDP planner for entropy and information objectives.</p>
       <p class="publication-links">
         <a href="https://arxiv.org/pdf/2502.02549" class="btn btn--primary btn--small btn--top btn--spacing">Paper</a>
